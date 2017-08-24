@@ -1,7 +1,12 @@
 apply plugin: 'java'
+apply plugin: 'jacoco'
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+}
+
+jacoco {
+    reportsDir = file("$buildDir/reports/jacoco")
 }
 
 sourceCompatibility = "1.7"
@@ -9,3 +14,12 @@ targetCompatibility = "1.7"
 
 apply from: 'bintray-push.gradle'
 //apply from: 'https://raw.githubusercontent.com/sensorberg-dev/gradle-bintray-push/master/gradle-bintray-push.gradle'
+
+/*
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.destination file("${buildDir}/reports/jacoco")
+    }
+}*/

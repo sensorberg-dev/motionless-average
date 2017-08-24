@@ -1,15 +1,18 @@
 package com.sensorberg.motionlessaverage;
 
+import static com.sensorberg.motionlessaverage.MathHelpers.calculateAngle;
+import static com.sensorberg.motionlessaverage.MathHelpers.calculateConstant;
+
 /**
  * MotionlessAverage,
- * because you don't need to allocate a million size array to calculate a moving average
+ * because you don't need to allocate a million size array to calculateAverage a moving average
  */
 public interface MotionlessAverage {
 
   float average(float newValue);
 
   class Builder {
-    private static final long NANO = 1000000;
+    static final long NANO = 1000000;
 
     /**
      * This static factory creates an average with a constant filter.
@@ -47,8 +50,8 @@ public interface MotionlessAverage {
         throw new IllegalArgumentException("maxTimeMs must be greater than minTimeMs");
       }
 
-      if (minFilter <= 1) {
-        throw new IllegalArgumentException("minFilter must be greater than one");
+      if (minFilter < 1) {
+        throw new IllegalArgumentException("minFilter must be greater than one or equal");
       }
 
       if (maxFilter <= minFilter) {
@@ -57,67 +60,9 @@ public interface MotionlessAverage {
 
       long minTime = minTimeMs * NANO;
       long maxTime = maxTimeMs * NANO;
-      float angle = (maxFilter - minFilter) / ((float) minTime - (float) maxTime);
-      float constant = maxFilter - angle * (float) minTime;
+      float angle = calculateAngle(minTime, maxTime, minFilter, maxFilter);
+      float constant = calculateConstant(angle, maxTime, maxFilter);
       return new TimedFilter(angle, constant, minTime, maxTime);
-    }
-
-
-    private static class ConstantFilter implements MotionlessAverage {
-
-      private final float filter;
-      private float value = Float.NaN;
-
-      private ConstantFilter(float filter) {
-        this.filter = filter;
-      }
-
-      @Override public float average(float newValue) {
-        if (Float.isNaN(value)) {
-          value = newValue;
-        } else {
-          value = value - ((value - newValue) / filter);
-        }
-        return value;
-      }
-    }
-
-    private static class TimedFilter implements MotionlessAverage {
-
-      private final float angle;
-      private final float constant;
-      private final long minTime;
-      private final long maxTime;
-
-      private long lastSeen = 0;
-      private float value = Float.NaN;
-
-      private float filter;
-      private long diff;
-
-      private TimedFilter(float angle, float constant, long minTime, long maxTime) {
-        this.angle = angle;
-        this.constant = constant;
-        this.minTime = minTime;
-        this.maxTime = maxTime;
-      }
-
-      @Override public float average(float newValue) {
-        long now = System.nanoTime();
-        if (lastSeen == 0) {
-          value = newValue;
-        } else {
-          diff = limit(now - lastSeen, minTime, maxTime);
-          filter = angle * ((float) diff) + constant;
-          value = value - ((value - newValue) / filter);
-        }
-        lastSeen = now;
-        return value;
-      }
-    }
-
-    private static long limit(long value, long min, long max) {
-      return Math.min(Math.max(value, min), max);
     }
   }
 }
