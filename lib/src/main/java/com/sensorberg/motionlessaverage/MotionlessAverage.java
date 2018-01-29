@@ -65,4 +65,18 @@ public interface MotionlessAverage {
       return new TimedFilter(angle, constant, minTime, maxTime);
     }
   }
+
+  class Helper {
+    /**
+     * Executes the calculations of the constant filter average, without instantiating a ConstantFilter object
+     *
+     * @param prevValue previously calculated value
+     * @param newValue  newly received value
+     * @param filter    filter value
+     * @return new value for the averaging
+     */
+    public float calculateConstantFilterAverage(float prevValue, float newValue, float filter){
+        return MathHelpers.calculateAverage(prevValue, newValue, filter);
+    }
+  }
 }
