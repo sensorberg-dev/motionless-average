@@ -32,6 +32,6 @@ allprojects {
 
 dependencies {
     ... others...
-    compile 'com.sensorberg.motionlessaverage:lib:<latest>'
+    compile 'com.sensorberg.motionlessaverage:motionlessaverage:<latest>'
 }
 ```
