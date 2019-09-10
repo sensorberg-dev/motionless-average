@@ -1,5 +1,6 @@
 apply plugin: 'java'
 apply plugin: 'jacoco'
+apply plugin: "com.vanniktech.maven.publish"
 
 dependencies {
     testImplementation 'junit:junit:4.12'
@@ -12,8 +13,6 @@ jacoco {
 sourceCompatibility = "1.7"
 targetCompatibility = "1.7"
 
-apply from: 'bintray-push.gradle'
-//apply from: 'https://raw.githubusercontent.com/sensorberg-dev/gradle-bintray-push/master/gradle-bintray-push.gradle'
 
 /*
 jacocoTestReport {
@@ -23,3 +22,15 @@ jacocoTestReport {
         html.destination file("${buildDir}/reports/jacoco")
     }
 }*/
+
+mavenPublish {
+    targets {
+        uploadArchives {
+            signing = false
+            releaseRepositoryUrl = findProperty("MOTIONLESS_AVERAGE_URL", null)
+            snapshotRepositoryUrl = "https://none"
+            repositoryUsername = findProperty("MOTIONLESS_AVERAGE_USERNAME", null)
+            repositoryPassword = findProperty("MOTIONLESS_AVERAGE_PASSWORD", null)
+        }
+    }
+}
