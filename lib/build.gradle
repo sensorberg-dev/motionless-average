@@ -13,16 +13,6 @@ jacoco {
 sourceCompatibility = "1.7"
 targetCompatibility = "1.7"
 
-
-/*
-jacocoTestReport {
-    reports {
-        xml.enabled false
-        csv.enabled false
-        html.destination file("${buildDir}/reports/jacoco")
-    }
-}*/
-
 mavenPublish {
     targets {
         uploadArchives {
