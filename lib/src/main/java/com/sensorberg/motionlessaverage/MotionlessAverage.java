@@ -23,10 +23,10 @@ public interface MotionlessAverage {
      * @return a MotionlessAverage using a constant filter
      */
     public static MotionlessAverage createConstantFilterAverage(float filter) {
-      if (filter < 1f) {
-        throw new IllegalArgumentException("Filter value must be greater than 1");
-      }
-      return new ConstantFilter(filter);
+      throw new IllegalStateException("Artifact ID changed from `lib` to `motionlessaverage`.\n" +
+              "Please update your build script accordingly.\n" +
+              "Gradle: implementation 'com.sensorberg.motionlessaverage:motionlessaverage:1.2.0'\n" +
+              "Maven: <artifactId>motionlessaverage</artifactId> <version>1.2.0</version>");
     }
 
     /**
@@ -41,28 +41,10 @@ public interface MotionlessAverage {
      * @return a MotionlessAverage using time based filter
      */
     public static MotionlessAverage createTimeDependentAverage(float minFilter, float maxFilter, long minTimeMs, long maxTimeMs) {
-
-      if (minTimeMs <= 0) {
-        throw new IllegalArgumentException("minTimeMs must be greater than zero");
-      }
-
-      if (maxTimeMs <= minTimeMs) {
-        throw new IllegalArgumentException("maxTimeMs must be greater than minTimeMs");
-      }
-
-      if (minFilter < 1) {
-        throw new IllegalArgumentException("minFilter must be greater than one or equal");
-      }
-
-      if (maxFilter <= minFilter) {
-        throw new IllegalArgumentException("maxFilter must be greater than minFilter");
-      }
-
-      long minTime = minTimeMs * NANO;
-      long maxTime = maxTimeMs * NANO;
-      float angle = calculateAngle(minTime, maxTime, minFilter, maxFilter);
-      float constant = calculateConstant(angle, maxTime, maxFilter);
-      return new TimedFilter(angle, constant, minTime, maxTime);
+        throw new IllegalStateException("Artifact ID changed from `lib` to `motionlessaverage`.\n" +
+                "Please update your build script accordingly.\n" +
+                "Gradle: implementation 'com.sensorberg.motionlessaverage:motionlessaverage:1.2.0'\n" +
+                "Maven: <artifactId>motionlessaverage</artifactId> <version>1.2.0</version>");
     }
   }
 
@@ -76,7 +58,10 @@ public interface MotionlessAverage {
      * @return new value for the averaging
      */
     public float calculateConstantFilterAverage(float prevValue, float newValue, float filter){
-        return MathHelpers.calculateAverage(prevValue, newValue, filter);
+        throw new IllegalStateException("Artifact ID changed from `lib` to `motionlessaverage`. " +
+                "Please update your build script accordingly." +
+                "Gradle: implementation 'com.sensorberg.motionlessaverage:motionlessaverage:1.2.0'" +
+                "Maven: <artifactId>motionlessaverage</artifactId> <version>1.2.0</version>");
     }
   }
 }
