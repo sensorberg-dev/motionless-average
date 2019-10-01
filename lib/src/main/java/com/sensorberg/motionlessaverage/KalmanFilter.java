@@ -73,14 +73,14 @@ public class KalmanFilter implements MotionlessAverage {
       // correction
       this.x = prediction + kalmanGain * (signal - (c * prediction));
       cov = uncertainty - (kalmanGain * c * uncertainty);
-
     }
+
     return x;
   }
 
   /**
    * Simplified filtering to conform to the {@link MotionlessAverage} interface.
-   * This assumes there's no expected variance (or the variance is unknown.
+   * This assumes there's no expected variance (or the variance is unknown).
    *
    * @param newValue the measured signal
    * @return the averaged value
