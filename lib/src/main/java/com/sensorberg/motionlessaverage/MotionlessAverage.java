@@ -64,6 +64,26 @@ public interface MotionlessAverage {
       float constant = calculateConstant(angle, maxTime, maxFilter);
       return new TimedFilter(angle, constant, minTime, maxTime);
     }
+
+    /**
+     * Creates a MotionlessAverage with a simplified KalmanFilter.
+     * This filter assumes a variance 'u' of zero and
+     * state/motion/measurement vectors to 1.0f/0.0f/1.0f respectively.
+     *
+     * @param r models the process noise and describes how noisy a system internally is.
+     *          How much noise can be expected from the system itself?
+     *          When a system is constant R can be set to a (very) low value.
+     * @param q resembles the measurement noise.
+     *          How much noise is caused by the measurements?
+     *          When it's expected that the measurements will contain most of the noise,
+     *          it makes sense to set this parameter to a high number (especially in comparison to the process noise).
+     *          Usually you make an estimate of R and Q based on measurements or domain knowledge.
+     * @return a MotionlessAverage using simplified Kalman filter
+     * @see KalmanFilter.Builder KalmanFilter.Builder for the filter with all parameters.
+     */
+    public static MotionlessAverage createSimplifiedKalmanFilter(float r, float q) {
+      return new KalmanFilter.Builder(r, q).build();
+    }
   }
 
   class Helper {
@@ -75,8 +95,8 @@ public interface MotionlessAverage {
      * @param filter    filter value
      * @return new value for the averaging
      */
-    public float calculateConstantFilterAverage(float prevValue, float newValue, float filter){
-        return MathHelpers.calculateAverage(prevValue, newValue, filter);
+    public float calculateConstantFilterAverage(float prevValue, float newValue, float filter) {
+      return MathHelpers.calculateAverage(prevValue, newValue, filter);
     }
   }
 }
