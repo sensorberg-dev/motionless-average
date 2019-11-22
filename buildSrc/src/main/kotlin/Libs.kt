@@ -8,21 +8,15 @@ import kotlin.String
  */
 object Libs {
   /**
+   * https://developer.android.com/jetpack/androidx
+   */
+  const val appcompat: String = "androidx.appcompat:appcompat:" + Versions.appcompat
+
+  /**
    * http://tools.android.com
    */
-  const val constraint_layout: String = "com.android.support.constraint:constraint-layout:" +
-      Versions.constraint_layout
-
-  /**
-   * https://developer.android.com/testing
-   */
-  const val espresso_core: String = "com.android.support.test.espresso:espresso-core:" +
-      Versions.espresso_core
-
-  /**
-   * http://developer.android.com/tools/extras/support-library.html
-   */
-  const val appcompat_v7: String = "com.android.support:appcompat-v7:" + Versions.appcompat_v7
+  const val constraintlayout: String = "androidx.constraintlayout:constraintlayout:" +
+      Versions.constraintlayout
 
   /**
    * https://developer.android.com/studio

@@ -7,8 +7,9 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.YAxis;
@@ -21,10 +22,10 @@ import com.sensorberg.motionlessaverage.MotionlessAverage;
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
   private static final int[] COLORS = {
-      Color.BLUE,
-      Color.RED,
-      Color.GREEN,
-      Color.GRAY
+          Color.BLUE,
+          Color.RED,
+          Color.GREEN,
+          Color.GRAY
   };
 
   private long createdAt;
@@ -51,12 +52,14 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
   }
 
-  @Override protected void onResume() {
+  @Override
+  protected void onResume() {
     super.onResume();
     sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_FASTEST);
   }
 
-  @Override protected void onPause() {
+  @Override
+  protected void onPause() {
     sensorManager.unregisterListener(this);
     super.onPause();
   }
@@ -113,14 +116,16 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
   }
 
-  @Override public void onSensorChanged(SensorEvent event) {
+  @Override
+  public void onSensorChanged(SensorEvent event) {
     float[] values = event.values;
     value = (float) Math.sqrt(
-        Math.pow(values[0], 2) +
-            Math.pow(values[1], 2) +
-            Math.pow(values[2], 2));
+            Math.pow(values[0], 2) +
+                    Math.pow(values[1], 2) +
+                    Math.pow(values[2], 2));
     update();
   }
 
-  @Override public void onAccuracyChanged(Sensor sensor, int accuracy) { /* */ }
+  @Override
+  public void onAccuracyChanged(Sensor sensor, int accuracy) { /* */ }
 }

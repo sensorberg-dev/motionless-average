@@ -12,11 +12,9 @@ import org.gradle.plugin.use.PluginDependencySpec
  * YOU are responsible for updating manually the dependency version.
  */
 object Versions {
-  const val constraint_layout: String = "1.1.3"
+  const val appcompat: String = "1.1.0"
 
-  const val espresso_core: String = "3.0.2"
-
-  const val appcompat_v7: String = "27.0.2" // available: "28.0.0"
+  const val constraintlayout: String = "1.1.3"
 
   const val com_android_tools_build_gradle: String = "3.5.2"
 
