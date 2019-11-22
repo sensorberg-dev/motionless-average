@@ -17,10 +17,10 @@ mavenPublish {
     targets {
         uploadArchives {
             signing = false
-            releaseRepositoryUrl = findProperty("MOTIONLESS_AVERAGE_URL", null)
+            releaseRepositoryUrl = "https://bintray.com/api/v1/maven/sensorberg/maven/motionlessaverage/;publish=1"
             snapshotRepositoryUrl = "https://none"
-            repositoryUsername = findProperty("MOTIONLESS_AVERAGE_USERNAME", null)
-            repositoryPassword = findProperty("MOTIONLESS_AVERAGE_PASSWORD", null)
+            repositoryUsername = findProperty("MAVEN_JCENTER_USERNAME", null)
+            repositoryPassword = findProperty("MAVEN_JCENTER_PASSWORD", null)
         }
     }
 }
