@@ -21,31 +21,4 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-def findProperty(String key, String defaultValue) {
-
-    println "Finding '$key' property"
-
-    // CI injected
-    if (System.getenv().containsKey(key)) {
-        return System.getenv(key)
-    }
-
-    // local.properties file (dev-environment)
-    def propsFile = rootProject.file('local.properties')
-    if (propsFile.exists()) {
-        def props = new Properties()
-        props.load(propsFile.newDataInputStream())
-        if (props[key] != null) {
-            return props[key]
-        }
-    }
-
-    // gradle properties
-    def found = findProperty(key)
-    if (found != null) {
-        return found
-    }
-
-    // default
-    return defaultValue
-}
+apply from: 'https://raw.githubusercontent.com/sensorberg-dev/gradle-scripts/master/common-def.gradle'
