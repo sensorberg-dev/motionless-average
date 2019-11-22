@@ -7,29 +7,11 @@ import kotlin.String
  *   `$ ./gradlew buildSrcVersions`
  */
 object Libs {
-  const val de_fayard_buildsrcversions_gradle_plugin: String =
-      "de.fayard.buildSrcVersions:de.fayard.buildSrcVersions.gradle.plugin:" +
-      Versions.de_fayard_buildsrcversions_gradle_plugin
-
-  /**
-   * https://developer.android.com/studio
-   */
-  const val com_android_tools_build_gradle: String = "com.android.tools.build:gradle:" +
-      Versions.com_android_tools_build_gradle
-
-  /**
-   * http://github.com/vanniktech/gradle-maven-publish-plugin/
-   */
-  const val gradle_maven_publish_plugin: String = "com.vanniktech:gradle-maven-publish-plugin:" +
-      Versions.gradle_maven_publish_plugin
-
   /**
    * http://tools.android.com
    */
   const val constraint_layout: String = "com.android.support.constraint:constraint-layout:" +
       Versions.constraint_layout
-
-  const val mpandroidchart: String = "com.github.PhilJay:MPAndroidChart:" + Versions.mpandroidchart
 
   /**
    * https://developer.android.com/testing
@@ -45,7 +27,25 @@ object Libs {
   /**
    * https://developer.android.com/studio
    */
+  const val com_android_tools_build_gradle: String = "com.android.tools.build:gradle:" +
+      Versions.com_android_tools_build_gradle
+
+  /**
+   * https://developer.android.com/studio
+   */
   const val lint_gradle: String = "com.android.tools.lint:lint-gradle:" + Versions.lint_gradle
+
+  const val mpandroidchart: String = "com.github.PhilJay:MPAndroidChart:" + Versions.mpandroidchart
+
+  /**
+   * http://github.com/vanniktech/gradle-maven-publish-plugin/
+   */
+  const val gradle_maven_publish_plugin: String = "com.vanniktech:gradle-maven-publish-plugin:" +
+      Versions.gradle_maven_publish_plugin
+
+  const val de_fayard_buildsrcversions_gradle_plugin: String =
+      "de.fayard.buildSrcVersions:de.fayard.buildSrcVersions.gradle.plugin:" +
+      Versions.de_fayard_buildsrcversions_gradle_plugin
 
   /**
    * http://junit.org
