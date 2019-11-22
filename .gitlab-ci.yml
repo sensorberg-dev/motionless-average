@@ -19,9 +19,22 @@ merge_request:
     paths:
       - "*/build/reports"
   tags:
-    - docker
+    - kvm
     - x86
   only:
     - merge_requests
   script:
-    - ./gradlew clean testDebugUnitTest lintDebug assembleDebug
+    # run emulator
+    - pushd $ANDROID_HOME
+    - tools/bin/avdmanager create avd -f -n cli_emu -b x86 -g google_apis -d "Nexus 5X" -c 128M -k "system-images;android-28;google_apis;x86"
+    - emulator/emulator -avd cli_emu -no-audio -no-window -gpu swiftshader_indirect -debug-init -wipe-data -no-snapshot &
+    - popd
+    - sleep 5
+    - echo "Emulator booting ... "
+
+    # build
+    - ./gradlew clean testDebugUnit lintDebug assembleDebug assembleAndroidTest
+
+    # await for emulator
+    - bash  <(curl -s https://git.sensorberg.io/snippets/4/raw)
+    - ./gradlew cAT
